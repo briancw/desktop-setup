@@ -1,0 +1,22 @@
+- name: Setup dotfiles
+  hosts: localhost
+  become_user: "{{ ansible_user_id }}"
+  tasks:
+    - name: clone dotfiles repository
+      git: repo=https://github.com/briancw/dotfiles.git
+           dest={{ ansible_user_dir }}/.dotfiles
+           update=no
+
+    - name: zshrc symlink
+      file: path={{ ansible_user_dir }}/.zshrc
+            src={{ ansible_user_dir }}/.dotfiles/zsh/.zshrc
+            state=link
+
+    - name: zshenv symlink
+      file: path={{ ansible_user_dir }}/.zshenv
+            src={{ ansible_user_dir }}/.dotfiles/zsh/.zshenv
+            state=link
+
+    - name: npmrc symlink
+      file: path={{ ansible_user_dir }}/.npmrc
+            src={{ ansible_user_dir }}/.dotfiles/npm/.npmrc

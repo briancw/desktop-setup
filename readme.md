@@ -1,0 +1,1 @@
+Run ```ansible-pull -U https://github.com/briancw/desktop-setup.git```

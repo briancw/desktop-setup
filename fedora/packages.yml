@@ -1,0 +1,27 @@
+- name: Install packages
+  hosts: localhost
+  become: no
+  tasks:
+    - name: upgrade all packages
+      package:
+        name: "*"
+        state: latest
+      become: yes
+
+    - name: install packages
+      package: name={{ item }}
+               state=present
+      with_items:
+        - htop
+        - zsh
+        - util-linux-user
+        # - ncdu
+        # - virt-manager
+        # - xclip
+      become: yes
+
+    - name: set zsh as default shell
+      command: "usermod --shell /usr/bin/zsh {{ ansible_user_id }}"
+      become: yes
+
+    - debug: var=ansible_user_id

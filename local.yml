@@ -1,14 +1,6 @@
-- hosts: localhost
-  become: true
-  tasks:
-  - name: Install Packages
-    dnf: name={{item}}
-    with_items:
-    - htop
-  - name: "Add flathub repo"
-    community.general.flatpak_remote:
-      name: "flathub"
-      state: "present"
-      flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
-      method: "system"
-    become: true
+- name: "Run all the local Playbooks"
+  hosts: localhost
+
+- import_playbook: ./fedora/packages.yml
+- import_playbook: ./fedora/dotfiles.yml
+# - import_playbook: ./fedora/rpmfusion.yml
