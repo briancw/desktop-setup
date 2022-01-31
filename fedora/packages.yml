@@ -20,8 +20,13 @@
         # - xclip
       become: yes
 
-    - name: set zsh as default shell
-      command: "usermod --shell /usr/bin/zsh {{ ansible_user_id }}"
-      become: yes
+    - name: Install FNM
+      command: "curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir './.fnm' --skip-shell"
+      become: no
 
-    - debug: var=ansible_user_id
+    - name: set zsh as default shell
+      # command: "usermod --shell /usr/bin/zsh {{ ansible_user_id }}"
+      command: "chsh -s $(which zsh)"
+      become: no
+
+    # - debug: var=ansible_user_id
