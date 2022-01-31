@@ -17,6 +17,22 @@
             src={{ ansible_user_dir }}/.dotfiles/zsh/.zshenv
             state=link
 
+    - name: aliases symlink
+      file: path={{ ansible_user_dir }}/.aliases
+            src={{ ansible_user_dir }}/.dotfiles/zsh/.aliases
+            state=link            
+
     - name: npmrc symlink
       file: path={{ ansible_user_dir }}/.npmrc
             src={{ ansible_user_dir }}/.dotfiles/npm/.npmrc
+            state=link
+
+    - name: gitconfig symlink
+      file: path={{ ansible_user_dir }}/.gitconfig
+            src={{ ansible_user_dir }}/.dotfiles/git/.gitconfig
+            state=link
+
+    - name: gitignore symlink
+      file: path={{ ansible_user_dir }}/.gitignore_global
+            src={{ ansible_user_dir }}/.dotfiles/git/.gitignore_global
+            state=link
