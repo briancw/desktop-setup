@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install Packages
+    dnf: name={{item}}
+    with_items:
+    - htop
+  - name: "Add flathub repo"
+    community.general.flatpak_remote:
+      name: "flathub"
+      state: "present"
+      flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
+      method: "system"
+    become: true
